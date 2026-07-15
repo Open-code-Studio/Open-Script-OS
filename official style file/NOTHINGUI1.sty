@@ -1,0 +1,1226 @@
+<filetype !style-file!>
+    // ================================================================
+    // NOTHING UI v1.0 — Official Style File
+    // 设计哲学: 数据优先, 零干扰, 键盘优先, 高密度, 深色模式默认
+    // Design Philosophy: Data-first, Zero distraction, Keyboard-first,
+    // High density, Dark mode default
+    // License: GPL3.0
+    // ================================================================
+
+    // ================================================================
+    // 1. 设计令牌  (Design Tokens)
+    // ================================================================
+    UI Element :root {
+        // --- 颜色系统 (Color System) ---
+
+        // 背景色板 — 6 层深色 Surface
+        --surface-0: #0A0A0A;
+        --surface-1: #0E0E0E;
+        --surface-2: #131313;
+        --surface-3: #181818;
+        --surface-4: #1E1E1E;
+        --surface-5: #252525;
+
+        // 强调色 (Accent) — 默认 Cyan
+        --accent: #00BCD4;
+        --accent-hover: #26C6DA;
+        --accent-active: #0097A7;
+        --accent-bg: rgba(0, 188, 212, 0.08);
+        --accent-bg-hover: rgba(0, 188, 212, 0.14);
+
+        // 备选强调色
+        --accent-green: #4AA26F;
+        --accent-orange: #FF9800;
+
+        // 文本层级
+        --text-primary: #F5F5F5;
+        --text-secondary: #B0B0B0;
+        --text-tertiary: #707070;
+
+        // 状态色
+        --color-success: #4AA26F;
+        --color-warning: #FF9800;
+        --color-error: #F44336;
+        --color-info: #2196F3;
+
+        // 边框与分割线
+        --border-subtle: rgba(255, 255, 255, 0.06);
+        --border-default: rgba(255, 255, 255, 0.10);
+        --border-strong: rgba(255, 255, 255, 0.16);
+
+        // 交互反馈
+        --hover-overlay: rgba(255, 255, 255, 0.04);
+        --press-overlay: rgba(255, 255, 255, 0.08);
+        --selected-overlay: rgba(255, 255, 255, 0.06);
+
+        // --- 阴影系统 (Shadow System) ---
+        --shadow-0: none;
+        --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.40);
+        --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.40), 0 2px 4px rgba(0, 0, 0, 0.30);
+        --shadow-3: 0 1px 2px rgba(0, 0, 0, 0.40), 0 4px 8px rgba(0, 0, 0, 0.30);
+        --shadow-4: 0 2px 4px rgba(0, 0, 0, 0.40), 0 8px 16px rgba(0, 0, 0, 0.30);
+        --shadow-5: 0 4px 8px rgba(0, 0, 0, 0.40), 0 12px 24px rgba(0, 0, 0, 0.30);
+
+        // --- 形状 (Shape) ---
+        --radius-none: 0px;
+        --radius-sm: 2px;
+        --radius-md: 4px;
+
+        // --- 字体 (Typography) ---
+        --font-ui: Inter, SF Pro Text, Segoe UI, Roboto, Noto Sans SC, sans-serif;
+        --font-code: JetBrains Mono, SF Mono, Cascadia Code, Fira Code, Consolas, monospace;
+
+        // 字号层级
+        --text-h1: 24px;
+        --text-h2: 18px;
+        --text-h3: 15px;
+        --text-body: 14px;
+        --text-body-sm: 13px;
+        --text-code: 13px;
+        --text-caption: 12px;
+        --text-overline: 11px;
+
+        // 行高
+        --leading-h1: 32px;
+        --leading-h2: 26px;
+        --leading-h3: 22px;
+        --leading-body: 20px;
+        --leading-body-sm: 18px;
+        --leading-code: 20px;
+        --leading-caption: 16px;
+        --leading-overline: 16px;
+
+        // 字重
+        --weight-heading: 600;
+        --weight-body: 400;
+        --weight-overline: 500;
+
+        // --- 间距 (Spacing) — 4px 基准 ---
+        --space-0: 0px;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-7: 28px;
+        --space-8: 32px;
+        --space-9: 36px;
+        --space-10: 40px;
+
+        // --- 动效 (Animation) ---
+        --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-emphasized: cubic-bezier(0.05, 0, 0, 1);
+        --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+        --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+        --duration-100: 100ms;
+        --duration-150: 150ms;
+        --duration-200: 200ms;
+
+        // --- 布局 (Layout) ---
+        --panel-left-width: 300px;
+        --panel-left-min: 240px;
+        --panel-right-min: 480px;
+        --statusbar-height: 28px;
+        --list-item-height: 32px;
+        --list-item-compact: 28px;
+        --card-padding-max: 16px;
+        --table-row-height: 32px;
+    }
+
+    // ================================================================
+    // 2. 全局基础样式 (Global Base Styles)
+    // ================================================================
+
+    UI Element Body {
+        background-color: var(--surface-0);
+        color: var(--text-primary);
+        font-family: var(--font-ui);
+        font-size: var(--text-body);
+        line-height: var(--leading-body);
+        font-weight: var(--weight-body);
+        margin: 0;
+        padding: 0;
+        font-feature-settings: "tnum";
+        -webkit-font-smoothing: antialiased;
+    }
+
+    UI Element Body.light-theme {
+        --surface-0: #FAFAFA;
+        --surface-1: #F5F5F5;
+        --surface-2: #EEEEEE;
+        --surface-3: #E0E0E0;
+        --surface-4: #D6D6D6;
+        --surface-5: #CCCCCC;
+        --text-primary: #1A1A1A;
+        --text-secondary: #5C5C5C;
+        --text-tertiary: #999999;
+    }
+
+    // ================================================================
+    // 3. 排版样式 (Typography Styles)
+    // ================================================================
+
+    UI Element H1 {
+        font-size: var(--text-h1);
+        line-height: var(--leading-h1);
+        font-weight: var(--weight-heading);
+        color: var(--text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    UI Element H2 {
+        font-size: var(--text-h2);
+        line-height: var(--leading-h2);
+        font-weight: var(--weight-heading);
+        color: var(--text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    UI Element H3 {
+        font-size: var(--text-h3);
+        line-height: var(--leading-h3);
+        font-weight: var(--weight-heading);
+        color: var(--text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    UI Element BodyText {
+        font-size: var(--text-body);
+        line-height: var(--leading-body);
+        font-weight: var(--weight-body);
+        color: var(--text-secondary);
+        max-width: 70ch;
+    }
+
+    UI Element BodyTextSmall {
+        font-size: var(--text-body-sm);
+        line-height: var(--leading-body-sm);
+        font-weight: var(--weight-body);
+        color: var(--text-secondary);
+    }
+
+    UI Element Code {
+        font-family: var(--font-code);
+        font-size: var(--text-code);
+        line-height: var(--leading-code);
+        font-weight: var(--weight-body);
+        color: var(--accent);
+        background-color: var(--surface-2);
+        padding: var(--space-0) var(--space-1);
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+    }
+
+    UI Element Caption {
+        font-size: var(--text-caption);
+        line-height: var(--leading-caption);
+        font-weight: var(--weight-body);
+        color: var(--text-tertiary);
+    }
+
+    UI Element Overline {
+        font-size: var(--text-overline);
+        line-height: var(--leading-overline);
+        font-weight: var(--weight-overline);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    // ================================================================
+    // 4. 按钮组件 (Button Components)
+    // ================================================================
+
+    // --- 基础按钮 ---
+    UI Element Button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        font-family: var(--font-ui);
+        font-size: var(--text-body-sm);
+        font-weight: var(--weight-body);
+        border-radius: var(--radius-sm);
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+        transition: background-color var(--duration-100) var(--ease-standard),
+                    border-color var(--duration-100) var(--ease-standard),
+                    color var(--duration-100) var(--ease-standard);
+        outline: none;
+        user-select: none;
+        white-space: nowrap;
+    }
+
+    UI Element Button:focus-visible {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: 2px;
+    }
+
+    UI Element Button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    // 尺寸 (Sizes)
+    UI Element Button.size-s {
+        height: 24px;
+        padding: var(--space-0) var(--space-2);
+        font-size: var(--text-caption);
+    }
+
+    UI Element Button.size-m {
+        height: 32px;
+        padding: var(--space-0) var(--space-3);
+    }
+
+    UI Element Button.size-l {
+        height: 40px;
+        padding: var(--space-0) var(--space-4);
+        font-size: var(--text-body);
+    }
+
+    // --- 填充按钮 (Filled) ---
+    UI Element Button.primary {
+        background-color: var(--accent);
+        color: #000000;
+        border-color: var(--accent);
+    }
+
+    UI Element Button.primary:hover {
+        background-color: var(--accent-hover);
+        border-color: var(--accent-hover);
+    }
+
+    UI Element Button.primary:active {
+        background-color: var(--accent-active);
+        border-color: var(--accent-active);
+    }
+
+    UI Element Button.primary.danger {
+        background-color: var(--color-error);
+        color: var(--text-primary);
+        border-color: var(--color-error);
+    }
+
+    // --- 轮廓按钮 (Outline) ---
+    UI Element Button.outline {
+        background-color: transparent;
+        color: var(--accent);
+        border-color: var(--accent);
+    }
+
+    UI Element Button.outline:hover {
+        background-color: var(--accent-bg);
+    }
+
+    UI Element Button.outline:active {
+        background-color: var(--accent-bg-hover);
+    }
+
+    UI Element Button.outline.danger {
+        color: var(--color-error);
+        border-color: var(--color-error);
+    }
+
+    UI Element Button.outline.danger:hover {
+        background-color: rgba(244, 67, 54, 0.08);
+    }
+
+    // --- 文本按钮 (Text) ---
+    UI Element Button.text {
+        background-color: transparent;
+        color: var(--accent);
+        border-color: transparent;
+    }
+
+    UI Element Button.text:hover {
+        background-color: var(--accent-bg);
+    }
+
+    UI Element Button.text:active {
+        background-color: var(--accent-bg-hover);
+    }
+
+    UI Element Button.text.danger {
+        color: var(--color-error);
+    }
+
+    UI Element Button.text.danger:hover {
+        background-color: rgba(244, 67, 54, 0.08);
+    }
+
+    // ================================================================
+    // 5. 卡片组件 (Card Component)
+    // ================================================================
+
+    UI Element Card {
+        background-color: var(--surface-2);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-2);
+        padding: var(--space-3);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-subtle);
+    }
+
+    UI Element Card.elevated {
+        background-color: var(--surface-3);
+        box-shadow: var(--shadow-3);
+    }
+
+    UI Element Card.dialog {
+        background-color: var(--surface-4);
+        box-shadow: var(--shadow-4);
+        padding: var(--space-4);
+    }
+
+    UI Element Card.tooltip {
+        background-color: var(--surface-5);
+        box-shadow: var(--shadow-5);
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-caption);
+    }
+
+    UI Element Card.flat {
+        box-shadow: none;
+        border-color: var(--border-default);
+    }
+
+    // 卡片标题
+    UI Element CardTitle {
+        font-size: var(--text-h3);
+        line-height: var(--leading-h3);
+        font-weight: var(--weight-heading);
+        color: var(--text-primary);
+        margin-bottom: var(--space-2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // ================================================================
+    // 6. 列表项组件 (List Item Component)
+    // ================================================================
+
+    UI Element ListItem {
+        display: flex;
+        align-items: center;
+        height: var(--list-item-height);
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        font-size: var(--text-body-sm);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: background-color var(--duration-100) var(--ease-standard);
+        border-left-width: 2px;
+        border-left-style: solid;
+        border-left-color: transparent;
+        user-select: none;
+    }
+
+    UI Element ListItem:hover {
+        background-color: var(--hover-overlay);
+    }
+
+    UI Element ListItem:active {
+        background-color: var(--press-overlay);
+    }
+
+    UI Element ListItem.selected {
+        background-color: var(--accent-bg);
+        color: var(--accent);
+        border-left-color: var(--accent);
+    }
+
+    UI Element ListItem.compact {
+        height: var(--list-item-compact);
+    }
+
+    UI Element ListItem:focus-visible {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: -2px;
+    }
+
+    // 列表分组标题
+    UI Element ListGroupHeader {
+        display: flex;
+        align-items: center;
+        height: 28px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        font-size: var(--text-overline);
+        font-weight: var(--weight-overline);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    // ================================================================
+    // 7. 进度条组件 (Progress Bar Component)
+    // ================================================================
+
+    UI Element ProgressBar {
+        width: 100%;
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+    }
+
+    UI Element ProgressBarFill {
+        height: 100%;
+        background-color: var(--accent);
+        border-radius: var(--radius-sm);
+        transition: width var(--duration-200) var(--ease-standard);
+    }
+
+    UI Element ProgressBarFill.indeterminate {
+        width: 40%;
+        animation: progressIndeterminate 1.5s var(--ease-standard) infinite;
+    }
+
+    UI Element ProgressBar.success ProgressBarFill {
+        background-color: var(--color-success);
+    }
+
+    UI Element ProgressBar.warning ProgressBarFill {
+        background-color: var(--color-warning);
+    }
+
+    UI Element ProgressBar.error ProgressBarFill {
+        background-color: var(--color-error);
+    }
+
+    // ================================================================
+    // 8. 标签页组件 (Tabs Component)
+    // ================================================================
+
+    UI Element TabBar {
+        display: flex;
+        align-items: stretch;
+        height: 36px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--border-subtle);
+        background-color: var(--surface-1);
+    }
+
+    UI Element Tab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        font-size: var(--text-body-sm);
+        font-weight: var(--weight-body);
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: transparent;
+        transition: color var(--duration-100) var(--ease-standard),
+                    border-color var(--duration-150) var(--ease-standard);
+        user-select: none;
+        white-space: nowrap;
+    }
+
+    UI Element Tab:hover {
+        color: var(--text-primary);
+        background-color: var(--hover-overlay);
+    }
+
+    UI Element Tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+    }
+
+    UI Element Tab:focus-visible {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: -2px;
+    }
+
+    // ================================================================
+    // 9. 搜索栏组件 (Search Bar Component)
+    // ================================================================
+
+    UI Element SearchBar {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        gap: var(--space-2);
+        background-color: var(--surface-2);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-default);
+        border-radius: var(--radius-sm);
+        font-family: var(--font-ui);
+        font-size: var(--text-body-sm);
+        color: var(--text-primary);
+        transition: border-color var(--duration-150) var(--ease-standard),
+                    background-color var(--duration-150) var(--ease-standard);
+        outline: none;
+    }
+
+    UI Element SearchBar:focus {
+        border-color: var(--accent);
+        background-color: var(--surface-3);
+    }
+
+    UI Element SearchBar:focus-visible {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: 2px;
+    }
+
+    UI Element SearchBar::placeholder {
+        color: var(--text-tertiary);
+    }
+
+    // ================================================================
+    // 10. 滚动条样式 (Scrollbar Styles)
+    // ================================================================
+
+    UI Element Scrollbar {
+        width: 6px;
+        background-color: transparent;
+    }
+
+    UI Element ScrollbarThumb {
+        width: 6px;
+        border-radius: var(--radius-sm);
+        background-color: rgba(255, 255, 255, 0.12);
+        transition: background-color var(--duration-100) var(--ease-standard);
+    }
+
+    UI Element ScrollbarThumb:hover {
+        background-color: rgba(255, 255, 255, 0.20);
+    }
+
+    UI Element ScrollbarThumb:active {
+        background-color: rgba(255, 255, 255, 0.28);
+    }
+
+    // ================================================================
+    // 11. 输入框组件 (Input Component)
+    // ================================================================
+
+    UI Element Input {
+        height: 32px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        background-color: var(--surface-2);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-default);
+        border-radius: var(--radius-sm);
+        font-family: var(--font-ui);
+        font-size: var(--text-body-sm);
+        color: var(--text-primary);
+        transition: border-color var(--duration-150) var(--ease-standard),
+                    background-color var(--duration-150) var(--ease-standard);
+        outline: none;
+    }
+
+    UI Element Input:hover {
+        border-color: var(--border-strong);
+    }
+
+    UI Element Input:focus {
+        border-color: var(--accent);
+        background-color: var(--surface-3);
+    }
+
+    UI Element Input:focus-visible {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: 2px;
+    }
+
+    UI Element Input::placeholder {
+        color: var(--text-tertiary);
+    }
+
+    UI Element Input:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    UI Element Input.error {
+        border-color: var(--color-error);
+    }
+
+    // ================================================================
+    // 12. 布局组件 (Layout Components)
+    // ================================================================
+
+    // 标准双面板布局
+    UI Element AppShell {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background-color: var(--surface-0);
+    }
+
+    UI Element TopBar {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+        gap: var(--space-3);
+        background-color: var(--surface-1);
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--border-subtle);
+        -webkit-app-region: drag;
+    }
+
+    UI Element MainContent {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    UI Element Sidebar {
+        width: var(--panel-left-width);
+        min-width: var(--panel-left-min);
+        height: 100%;
+        background-color: var(--surface-1);
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: var(--border-subtle);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    UI Element ContentPanel {
+        flex: 1;
+        min-width: var(--panel-right-min);
+        height: 100%;
+        background-color: var(--surface-0);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    UI Element StatusBar {
+        display: flex;
+        align-items: center;
+        height: var(--statusbar-height);
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        gap: var(--space-3);
+        background-color: var(--surface-1);
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: var(--border-subtle);
+        font-size: var(--text-caption);
+        color: var(--text-tertiary);
+    }
+
+    // 三面板布局扩展
+    UI Element PanelFileTree {
+        width: 220px;
+        min-width: 180px;
+        height: 100%;
+        background-color: var(--surface-1);
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: var(--border-subtle);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    UI Element PanelList {
+        width: 300px;
+        min-width: 240px;
+        height: 100%;
+        background-color: var(--surface-1);
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: var(--border-subtle);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    // ================================================================
+    // 13. 状态指示器 (Status Indicators)
+    // ================================================================
+
+    UI Element StatusDot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    UI Element StatusDot.success {
+        background-color: var(--color-success);
+    }
+
+    UI Element StatusDot.warning {
+        background-color: var(--color-warning);
+    }
+
+    UI Element StatusDot.error {
+        background-color: var(--color-error);
+    }
+
+    UI Element StatusDot.info {
+        background-color: var(--color-info);
+    }
+
+    UI Element StatusDot.inactive {
+        background-color: var(--text-tertiary);
+    }
+
+    // 加载旋转器
+    UI Element Spinner {
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.10);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 600ms linear infinite;
+    }
+
+    UI Element Spinner.size-xs {
+        width: 12px;
+        height: 12px;
+        border-width: 1.5px;
+    }
+
+    UI Element Spinner.size-sm {
+        width: 16px;
+        height: 16px;
+        border-width: 1.5px;
+    }
+
+    UI Element Spinner.size-md {
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+    }
+
+    UI Element Spinner.size-lg {
+        width: 24px;
+        height: 24px;
+        border-width: 2px;
+    }
+
+    // ================================================================
+    // 14. 标签与徽章 (Tags & Badges)
+    // ================================================================
+
+    UI Element Tag {
+        display: inline-flex;
+        align-items: center;
+        height: 20px;
+        padding-left: var(--space-2);
+        padding-right: var(--space-2);
+        font-size: var(--text-caption);
+        font-weight: var(--weight-overline);
+        color: var(--text-secondary);
+        background-color: var(--surface-3);
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    UI Element Tag.accent {
+        color: var(--accent);
+        background-color: var(--accent-bg);
+    }
+
+    UI Element Tag.success {
+        color: var(--color-success);
+        background-color: rgba(74, 162, 111, 0.12);
+    }
+
+    UI Element Tag.warning {
+        color: var(--color-warning);
+        background-color: rgba(255, 152, 0, 0.12);
+    }
+
+    UI Element Tag.error {
+        color: var(--color-error);
+        background-color: rgba(244, 67, 54, 0.12);
+    }
+
+    // ================================================================
+    // 15. 分割线与间距 (Dividers & Spacers)
+    // ================================================================
+
+    UI Element Divider {
+        width: 100%;
+        height: 1px;
+        background-color: var(--border-default);
+        margin-top: var(--space-2);
+        margin-bottom: var(--space-2);
+    }
+
+    UI Element Divider.subtle {
+        background-color: var(--border-subtle);
+    }
+
+    UI Element Divider.strong {
+        background-color: var(--border-strong);
+    }
+
+    UI Element Spacer {
+        display: block;
+        width: 100%;
+    }
+
+    // ================================================================
+    // 16. 表格组件 (Table Component)
+    // ================================================================
+
+    UI Element Table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--text-body-sm);
+        color: var(--text-secondary);
+    }
+
+    UI Element TableHeader {
+        position: sticky;
+        top: 0;
+        background-color: var(--surface-2);
+        z-index: 1;
+    }
+
+    UI Element TableHeaderCell {
+        height: 28px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        text-align: left;
+        font-size: var(--text-caption);
+        font-weight: var(--weight-overline);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--border-default);
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    UI Element TableRow {
+        height: var(--table-row-height);
+        transition: background-color var(--duration-100) var(--ease-standard);
+    }
+
+    UI Element TableRow:hover {
+        background-color: var(--hover-overlay);
+    }
+
+    UI Element TableRow.selected {
+        background-color: var(--accent-bg);
+    }
+
+    UI Element TableCell {
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--border-subtle);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // ================================================================
+    // 17. 代码块组件 (Code Block Component)
+    // ================================================================
+
+    UI Element CodeBlock {
+        display: block;
+        font-family: var(--font-code);
+        font-size: var(--text-code);
+        line-height: var(--leading-code);
+        color: var(--text-primary);
+        background-color: var(--surface-2);
+        border-radius: var(--radius-sm);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-subtle);
+        padding: var(--space-3);
+        overflow-x: auto;
+        white-space: pre;
+    }
+
+    // ================================================================
+    // 18. 弹窗与对话框 (Dialog Components)
+    // ================================================================
+
+    UI Element Overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: overlayFadeIn var(--duration-150) var(--ease-decelerate);
+    }
+
+    UI Element Dialog {
+        background-color: var(--surface-4);
+        box-shadow: var(--shadow-4);
+        border-radius: var(--radius-md);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-default);
+        padding: var(--space-4);
+        min-width: 400px;
+        max-width: 560px;
+        max-height: 80vh;
+        animation: dialogSlideIn var(--duration-200) var(--ease-emphasized);
+    }
+
+    UI Element DialogHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-4);
+    }
+
+    UI Element DialogFooter {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: var(--space-2);
+        margin-top: var(--space-4);
+    }
+
+    // ================================================================
+    // 19. 菜单组件 (Menu Component)
+    // ================================================================
+
+    UI Element Menu {
+        background-color: var(--surface-2);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-3);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--border-default);
+        padding: var(--space-1);
+        min-width: 160px;
+        overflow: hidden;
+    }
+
+    UI Element MenuItem {
+        display: flex;
+        align-items: center;
+        height: 32px;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+        gap: var(--space-2);
+        font-size: var(--text-body-sm);
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-radius: var(--radius-sm);
+        transition: background-color var(--duration-100) var(--ease-standard);
+        user-select: none;
+    }
+
+    UI Element MenuItem:hover {
+        background-color: var(--hover-overlay);
+    }
+
+    UI Element MenuItem:active {
+        background-color: var(--press-overlay);
+    }
+
+    UI Element MenuItem.danger {
+        color: var(--color-error);
+    }
+
+    UI Element MenuSeparator {
+        height: 1px;
+        background-color: var(--border-default);
+        margin: var(--space-1) var(--space-2);
+    }
+
+    // ================================================================
+    // 20. 辅助功能 (Accessibility)
+    // ================================================================
+
+    UI Element SrOnly {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    UI Element FocusRing {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: var(--accent);
+        outline-offset: 2px;
+    }
+
+    // ================================================================
+    // 21. @keyframes 动画定义 (Animation Keyframes)
+    // ================================================================
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes progressIndeterminate {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(300%);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            transform: translateY(4px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-4px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes overlayFadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes dialogSlideIn {
+        from {
+            transform: translateY(8px) scale(0.98);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes pulseAccent {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    // ================================================================
+    // 22. 响应式断点 (Responsive Breakpoints)
+    // ================================================================
+
+    @media (max-width: 1023px) {
+        UI Element Sidebar {
+            width: 240px;
+            min-width: 200px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        UI Element Sidebar {
+            display: none;
+        }
+
+        UI Element ContentPanel {
+            min-width: 0;
+        }
+
+        UI Element Dialog {
+            min-width: 0;
+            max-width: calc(100vw - var(--space-4) * 2);
+            margin: var(--space-4);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        UI Element * {
+            animation-duration: 0ms;
+            transition-duration: 0ms;
+        }
+    }
+
+</filetype>

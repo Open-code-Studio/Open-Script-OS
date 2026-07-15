@@ -1,0 +1,36 @@
+[package]
+name = "os-edit-rs"
+version = "0.1.0"
+edition = "2021"
+description = "Gen 1 Open-Script Editor & Runtime — written in Rust for bootstrapping Open-Script"
+
+[dependencies]
+# GUI
+eframe = "0.31"
+egui = "0.31"
+egui-winit = "0.31"
+egui-wgpu = "0.31"
+wgpu = "24"
+winit = "0.30"
+
+# Parsing
+regex = "1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Utilities
+thiserror = "2"
+log = "0.4"
+env_logger = "0.11"
+dirs = "6"
+walkdir = "2"
+glob = "0.3"
+
+[profile.release]
+opt-level = 2
+
+[[example]]
+name = "hello"
+path = "examples/hello.os"
